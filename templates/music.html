@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>The Amazing Browser Audio Streamer</h2>
+    <audio controls="controls" autoplay="autoplay"></audio>
+    <ul>
+    {% for track in tracks %}
+        <li><a href="javascript:void(0);">{{track["path"].split("/")[-1]}}</a></li>
+    {% endfor %}
+    </ul>
+    <script type='text/javascript'>
+        {% for track in tracks %} 
+            $('li').click(function(){
+                var str = $(this).text()
+                $('audio').attr('src', '/static/music/'+str);
+            });
+        {% endfor %}
+    </script>
+{% endblock %}
+{% block nav %}
+{% for tag in taglist %}
+    <li><a href="/tagged/{{tag}}">{{tag}}</a></li>
+{% endfor %}
+{% endblock %}
